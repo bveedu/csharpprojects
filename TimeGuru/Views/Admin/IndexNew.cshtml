@@ -1,0 +1,75 @@
+﻿@model TimeGuru.Controllers.AdminController.AdminModel
+@{
+    ViewBag.Title = "Index";
+    ViewBag.ngApp = "timeAdmin";
+}
+
+
+    <style type="text/css">
+         @if (Model.Project)
+         {
+             <text>
+             g.slice0 {
+                 cursor: pointer;
+             }
+             </text>
+         }
+      </style>
+
+
+<h2>@Html.ActionLink("Register User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</h2>
+
+<aside class="content-navigation affix">
+	<section class="nav-group">
+		<header>
+			<h1>Administration</h1>
+		</header>
+		<ul class="nav nav-tabs nav-stacked" data-ng-controller="AsideMenuController">
+		    @if (Model.Project)
+		    {
+		        <li data-ng-class="{active:viewingProject}"><a href="#/project">Projects</a><span class="arrow-left"></span></li>
+		    }
+            @if (Model.Task)
+		    {
+                <li data-ng-class="{active:viewingTask}"><a href="#/task">Tasks</a><span class="arrow-left"></span></li>
+            }
+             @if (Model.UserProjects)
+		    {
+                <li data-ng-class="{active:viewingUserProjects}"><a href="#/userProjects">UserProjects</a><span class="arrow-left"></span></li>
+            }
+		   </ul>
+	</section>
+</aside>
+<div class="content">
+    <div class="single-column">
+        <section>
+        
+            <div data-ng-view></div>
+
+        </section>
+        @if (Model.Project)
+        {
+            <script type="text/ng-template" id="project.view">
+		        @Html.Partial("Project.part")
+	        </script>
+        }
+        @if (Model.Task)
+        {
+            <script type="text/ng-template" id="task.view">
+		        @Html.Partial("Task.part")
+	        </script>
+        }
+        @if (Model.UserProjects)
+        {
+            <script type="text/ng-template" id="userProjects.view">
+		        @Html.Partial("UserProjects.part")
+	        </script>
+        }
+       
+    </div>
+</div>
+
+@Scripts.Render(
+        "~/Scripts/timeguru/app.js",
+         "~/Scripts/timeguru/asideMenuController.js"
+        );

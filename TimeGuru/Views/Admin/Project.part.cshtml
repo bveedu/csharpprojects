@@ -1,0 +1,25 @@
+﻿<div>
+    <section>
+        <table class="table">
+            <thead data-ng-model="sort" @*data-spy="affix"*@>
+                <tr>
+                    <th data-sort-by="Name">Name
+                        <i data-ng-class="{'icon-sort-down':$sorting < 0,'icon-sort-up':$sorting > 0}"></i>
+                    </th>
+                    <th data-sort-by="Description"> Description
+                        <i data-ng-class="{'icon-sort-down':$sorting < 0,'icon-sort-up':$sorting > 0}"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="project in projects">
+                    <td>{{project.Name}}</td>
+                    <td>{{project.Description}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="alert alert-error" data-ng-show="errors">
+            <li data-ng-repeat="error in errors">{{error.ErrorMessage}}</li>
+        </ul>
+    </section>
+</div>
